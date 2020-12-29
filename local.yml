@@ -1,0 +1,38 @@
+---
+- hosts: localhost
+  connection: local
+  become: true
+
+  tasks:
+  - name: Update respository
+    apt:
+      update_cache: yes
+    when: ansible_distribution in ["Debian", "Ubuntu"]
+  
+  - name: install packages
+    package:
+      name:
+        - htop
+        - smplayer
+        - vim
+        - python3-psutil 
+  
+  - name: copy wallpaper file
+    copy:
+      src: files/Wallpaper.png
+      dest: /usr/share/backgrounds/pop/ansible-wallpaper.png
+      owner: root
+      group: root
+
+  - name: set wallpaper
+    become_user: max
+    dconf:
+      key: "/org/gnome/desktop/background/picture-uri"
+      value: "'file:///usr/share/backgrounds/pop/ansible-wallpaper.png'"
+
+  - name: set wallpaper position
+    become_user: max
+    dconf:
+      key: "/org/gnome/desktop/background/picture-options"
+      value: "'zoom'"
+ 
