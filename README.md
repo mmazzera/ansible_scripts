@@ -1,2 +1,2 @@
 # ansible_test
-1st Test using Ansible 
+1st Test using Ansible.
