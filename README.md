@@ -1,2 +1,2 @@
-# ansible_test
+# ansibletest
 1st Test using Ansible.
